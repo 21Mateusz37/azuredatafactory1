@@ -1,0 +1,9 @@
+{
+	"name": "Datafactoryskibidi",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "f40776f2-e6af-47ba-a4b8-a2709ae92422",
+		"tenantId": "63441aef-da0e-4397-bb7e-f9d4705e963b"
+	}
+}
