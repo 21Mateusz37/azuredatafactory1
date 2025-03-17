@@ -18,6 +18,9 @@
 						"type": "DatasetReference"
 					},
 					"name": "Errors"
+				},
+				{
+					"name": "source1"
 				}
 			],
 			"sinks": [],
@@ -55,6 +58,8 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> Errors",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false) ~> source1",
 				"Errors pivot(groupBy(datetime,",
 				"          machineID),",
 				"     pivotBy(errorID),",
