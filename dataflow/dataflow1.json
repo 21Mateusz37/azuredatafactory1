@@ -27,6 +27,9 @@
 				},
 				{
 					"name": "join1"
+				},
+				{
+					"name": "select1"
 				}
 			],
 			"scriptLines": [
@@ -60,7 +63,19 @@
 				"     joinType:'left',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> join1"
+				"     broadcast: 'auto')~> join1",
+				"join1 select(mapColumn(",
+				"          datetime = telemetry@datetime,",
+				"          machineID = telemetry@machineID,",
+				"          volt,",
+				"          rotate,",
+				"          pressure,",
+				"          vibration,",
+				"          datetime = ErrorsToColums@datetime,",
+				"          machineID = ErrorsToColums@machineID",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1"
 			]
 		}
 	}
