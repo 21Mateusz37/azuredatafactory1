@@ -24,6 +24,9 @@
 			"transformations": [
 				{
 					"name": "ErrorsToColums"
+				},
+				{
+					"name": "join1"
 				}
 			],
 			"scriptLines": [
@@ -51,7 +54,13 @@
 				"     pivotBy(errorID),",
 				"     sumaWystapien = count(errorID),",
 				"     columnNaming: '$N$V',",
-				"     lateral: false) ~> ErrorsToColums"
+				"     lateral: false) ~> ErrorsToColums",
+				"telemetry, ErrorsToColums join(telemetry@datetime == ErrorsToColums@datetime",
+				"     && telemetry@machineID == ErrorsToColums@machineID,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1"
 			]
 		}
 	}
