@@ -11,6 +11,13 @@
 					},
 					"name": "telemetry",
 					"description": "plik danych telemetrii (mały)"
+				},
+				{
+					"dataset": {
+						"referenceName": "DelimitedText2",
+						"type": "DatasetReference"
+					},
+					"name": "Errors"
 				}
 			],
 			"sinks": [],
@@ -26,7 +33,15 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> telemetry"
+				"     ignoreNoFilesFound: false) ~> telemetry",
+				"source(output(",
+				"          datetime as timestamp,",
+				"          machineID as short,",
+				"          errorID as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> Errors"
 			]
 		}
 	}
