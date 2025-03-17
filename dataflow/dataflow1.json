@@ -46,7 +46,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> Errors",
-				"Errors pivot(groupBy(errorID,",
+				"Errors pivot(groupBy(datetime,",
 				"          machineID),",
 				"     pivotBy(errorID),",
 				"     sumaWystapien = count(errorID),",
