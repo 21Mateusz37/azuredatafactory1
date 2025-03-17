@@ -20,7 +20,11 @@
 					"name": "Errors"
 				},
 				{
-					"name": "source1"
+					"dataset": {
+						"referenceName": "FailuresDS",
+						"type": "DatasetReference"
+					},
+					"name": "Failures"
 				}
 			],
 			"sinks": [],
@@ -39,6 +43,9 @@
 				},
 				{
 					"name": "window24h"
+				},
+				{
+					"name": "FailuresToColums"
 				}
 			],
 			"scriptLines": [
@@ -61,8 +68,14 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> Errors",
-				"source(allowSchemaDrift: true,",
-				"     validateSchema: false) ~> source1",
+				"source(output(",
+				"          datetime as string,",
+				"          machineID as string,",
+				"          failure as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> Failures",
 				"Errors pivot(groupBy(datetime,",
 				"          machineID),",
 				"     pivotBy(errorID),",
@@ -101,7 +114,11 @@
 				"     startRowOffset: -24L,",
 				"     endRowOffset: 0L,",
 				"     mean_rotate_24h = mean(rotate),",
-				"          mean_volt_24h = mean(volt)) ~> window24h"
+				"          mean_volt_24h = mean(volt)) ~> window24h",
+				"Failures pivot(pivotBy(failure),",
+				"     failure = count(failure),",
+				"     columnNaming: '$N$V',",
+				"     lateral: true) ~> FailuresToColums"
 			]
 		}
 	}
