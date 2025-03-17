@@ -30,6 +30,9 @@
 				},
 				{
 					"name": "select1"
+				},
+				{
+					"name": "window1"
 				}
 			],
 			"scriptLines": [
@@ -75,7 +78,8 @@
 				"          machineID = ErrorsToColums@machineID",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1"
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 window(asc(datetime, true)) ~> window1"
 			]
 		}
 	}
