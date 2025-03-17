@@ -36,6 +36,9 @@
 				},
 				{
 					"name": "window1"
+				},
+				{
+					"name": "window24h"
 				}
 			],
 			"scriptLines": [
@@ -92,7 +95,8 @@
 				"          mean_pressure_3h = mean(pressure),",
 				"          mean_vibration_3h = mean(vibration),",
 				"          mean_volt_3h = mean(volt),",
-				"          stddev_volt_3h = stddev(volt)) ~> window1"
+				"          stddev_volt_3h = stddev(volt)) ~> window1",
+				"window1 window() ~> window24h"
 			]
 		}
 	}
