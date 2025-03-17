@@ -21,7 +21,11 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "ErrorsToColums"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          datetime as timestamp,",
@@ -41,7 +45,10 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> Errors"
+				"     ignoreNoFilesFound: false) ~> Errors",
+				"Errors pivot(sumaWystapien = count(errorID),",
+				"     columnNaming: '$N$V',",
+				"     lateral: false) ~> ErrorsToColums"
 			]
 		}
 	}
