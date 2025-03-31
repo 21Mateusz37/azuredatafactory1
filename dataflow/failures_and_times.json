@@ -32,7 +32,7 @@
 						"referenceName": "AzureSqlTable3",
 						"type": "DatasetReference"
 					},
-					"name": "sink2"
+					"name": "failuresAndTimes"
 				},
 				{
 					"name": "sink3"
@@ -84,8 +84,6 @@
 				"join1 select(mapColumn(",
 				"          datetime = wyborkolumn@datetime,",
 				"          machineID = wyborkolumn@machineID,",
-				"          datetime = failures@datetime,",
-				"          machineID = failures@machineID,",
 				"          failure",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
@@ -109,7 +107,7 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> sink2",
+				"     errorHandlingOption: 'stopOnFirstError') ~> failuresAndTimes",
 				"select2 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     skipDuplicateMapInputs: true,",
